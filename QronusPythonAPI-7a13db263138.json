@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "qronuspythonapi",
+  "private_key_id": "7a13db2631384338071bfaeb7acf89fa7f027c9b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEugIBADANBgkqhkiG9w0BAQEFAASCBKQwggSgAgEAAoIBAQDb4IECNWVihQkW\nESv8QWz0H3J4hAniIIXllVm15SCp8vPi/Wlf+kocf7GPXG4w3mpnHARconhAFfLD\nkLaNalEQ5hwzeJtRedZSB98GcyPKz8DKBdBVYo49kGunqzj2kRZ5Lv75Ky32eQPj\ncofc3IrgxDqPGJ6y8J1blCUQtn4xDw1kBvRjYDQXVQZrCj60/KPF6CXw8r8dI/ek\noleEQehEApgjIqqxaZkqFME04VaHhFycoghYHsFAE42D+x/NNEcoxRg0PFjcThX3\nzyjRC2funJW7xxE/ynEkPovVuKGiatbk4N9AMEXC6Z+qlJo1oI/uDX+qHln8fo/0\nTCTg34+ZAgMBAAECggEAB7ZaeBQc5AWEEdLU3uKBmpd+yaTh/t1CrRCdxrBMgsGL\nle7rEwuBrXm6JevpTowCoe685W3qd179tqfdC11LDiNwIksM8aDrKFHv2/dOblb2\nrW9iRRhxok2uRQGPvDBPID2Kgn1l/ZL1lLUH+HKA6Yzge/PyXxbrAhMScMFh8EEE\n/bGdTZD6jiG2tw9YdzOGPi83weJ+RCit9gbyl1h0NRi92SS6/PyhDh+DiHx0eM3h\nR75gFmhrpXXhBl8nvq9o4/AzwcgZNh+ZhlxplhOlLsoU5kO0LfH8WrSvHC8m3qE1\nEuQlCTbAihqEoodxLHdtbrwfi53s7wLXtrtPWrPILQKBgQD6Jw2DOsXxx8x8uyEa\nITeU7+k0GFk4Mt3s/c6v/5xgjzXuqdsvJuLrNJp7CG1/ntDsfm5UCIw7MOnimlmy\nc6TneNJKemnFTls1p+VW6vexyYO+RncdPzQTeCJcqCTvlmU8TZWwWsIPLZvdbK7K\nDRv9Qd42VEOyBITJ7uhua7WkhQKBgQDhBEclsFMx2B7JPvrf+KO8/MFWrPHSkhQj\nBH6rd4AiKefB9X98BJ/mJGkF42YBz7Arz0hafcmy7LhpQ1Cec6FLjBQiuhbYBOhO\n0X5NkhUE2/wBQ9rU1NSV4+ZN360GZv+YaI1CLZc5E8CMpGaHQJbZF8HImULN832F\nXY9bsaXFBQKBgGgJBd2l+9zqM2lMih/L4MnYXSyFU9XDkfiWNfeMXwTpioyPp9Cc\nY5NedUDl6GRDMLCqhEf+phOX7C2J8/P7lIGQBiVjc8nTJKvT/9V+MzWFkXz44WEQ\ngB/4vpG6fGIIMmI6Ah8uH7cgSMp2ANuXSCSz2C7QLLdEmdVBvvjtYsXhAn8njZj0\nBwqYuGSw+2Ed/ZbKoaNamQvo98SSYzfg7CCZ4MPcVEsUgbuZuMy9PDuyFc/h443U\nWkgaK4I+/pYtRCYWIYlokU1yq2oqcKjC+eq37/NcRZEx2DeGIYlaJvdDKNfE8pvi\nBiGO5unxzvQ20iOyBXsKx+X2TdbCmq+YbqG1AoGAAfqkr1KvSHoayWFHGETZ9Lak\nNtbNTr9zxqS+t50zz8H+8R4NMVvBYNh6XfSJmSoVMjrBkpsz8kx0Z8E6d2vHeJYN\neMH5cFs8LF4HMNJG28eS4ifI3dh7F2gJY749k05Q2yjFvwOoHeHf+w92Edxd+TnR\ny7jQTKjphJXTLiYFIBg=\n-----END PRIVATE KEY-----\n",
+  "client_email": "newqronusapi@qronuspythonapi.iam.gserviceaccount.com",
+  "client_id": "100400885633116583776",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/newqronusapi%40qronuspythonapi.iam.gserviceaccount.com"
+}
