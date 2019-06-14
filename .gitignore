@@ -103,4 +103,5 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-QronusPythonAPI-7a13db263138.json
+#APIs JSON files
+*.json
