@@ -1,12 +1,9 @@
 """
 Copyright 2013 Google Inc. All Rights Reserved.
-
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-
     http://www.apache.org/licenses/LICENSE-2.0
-
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -43,14 +40,15 @@ credentials = ServiceAccountCredentials.from_json_keyfile_name(config.SERVICE_AC
 http = httplib2.Http()
 http = credentials.authorize(http)
 
+logging.basicConfig(filename='example.log',level=logging.DEBUG)
+logging.debug('This message should go to the log file')
+
 logging.info('Credentials: %s' % credentials.to_json())
 
 def displayIndex(request):
   """Serves the index page.
-
   Args:
     request: A HTTP request object.
-
   Returns:
     The index page.
   """
@@ -61,10 +59,8 @@ def displayIndex(request):
 
 def handleJwt(request):
   """Serves JWT response of appropriate type.
-
   Args:
     request: A HTTP request object.
-
   Returns:
     An encoded JWT object as response.
   """
@@ -95,13 +91,38 @@ def handleJwt(request):
   response.content_type = 'Application/JWT'
   return response
 
+def handleGetList(request):
+  """Make API call to get list of Loyalty Classes by certain Issuer ID.
+  Args:
+    request: A HTTP request object.
+  Returns:
+    The result indicating success/failure of the API call to insert the class.
+  """
+  headers = {
+  'Accept': 'application/json',
+  'Content-Type': 'application/json; charset=UTF-8',
+  'issuerId': config.ISSUER_ID
+  }
+
+  method='GET'
+  uri = 'https://www.googleapis.com/walletobjects/v1'
+  path = '/loyaltyClass?issuerId='
+  params =  {'issuerId':config.ISSUER_ID}
+  target = urlparse(uri+path+config.ISSUER_ID)
+  # http.add_credentials('issuerId', config.ISSUER_ID)
+  api_response, content = http.request(
+    target.geturl(), method, params, headers)
+  response = webapp2.Response('Successfully got list of Loyalty Classes')
+  if 'error' in api_response.keys():
+    response = webapp2.Response('Error getting data %s' % object_id)
+
+  logging.info(content)
+  return response
 
 def handleInsert(request):
   """Make API call to insert a new loyalty or offer class.
-
   Args:
     request: A HTTP request object.
-
   Returns:
     The result indicating success/failure of the API call to insert the class.
   """
@@ -142,10 +163,8 @@ def handleInsert(request):
 
 def handleWebservice(request):
   """Creates wallet object according to webservice requests.
-
   Args:
     request: A HTTP request object.
-
   Returns:
     Returns object on success, or, error on failure.
   """
@@ -201,5 +220,6 @@ application = webapp2.WSGIApplication([
     ('/', displayIndex),
     ('/jwt', handleJwt),
     ('/insert', handleInsert),
+    ('/getlist', handleGetList),
     ('/webservice', handleWebservice)
     ])

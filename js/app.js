@@ -50,6 +50,11 @@ function init() {
       console.log(data);
     });
   });
+  document.getElementById('cardlist').addEventListener('click', function() {
+    $.get('getlist', function(data) {
+      console.log(data);
+    });
+  });
 
   $.when(
     // Get jwt of loyalty object and render 'Save to Android Pay' button.
