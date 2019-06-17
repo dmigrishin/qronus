@@ -40,10 +40,8 @@ credentials = ServiceAccountCredentials.from_json_keyfile_name(config.SERVICE_AC
 http = httplib2.Http()
 http = credentials.authorize(http)
 
-logging.basicConfig(filename='example.log',level=logging.DEBUG)
-logging.debug('This message should go to the log file')
-
-logging.info('Credentials: %s' % credentials.to_json())
+# logging.debug('This is a debug message')
+# logging.info('This is an info message')
 
 def displayIndex(request):
   """Serves the index page.
@@ -106,7 +104,7 @@ def handleGetList(request):
 
   method='GET'
   uri = 'https://www.googleapis.com/walletobjects/v1'
-  path = '/loyaltyClass?issuerId='
+  path = '/giftCardClass/3293346916822849083.pass.ru.qronus?issuerId='
   params =  {'issuerId':config.ISSUER_ID}
   target = urlparse(uri+path+config.ISSUER_ID)
   # http.add_credentials('issuerId', config.ISSUER_ID)
