@@ -16,7 +16,7 @@ limitations under the License.
 
 SERVICE_ACCOUNT_EMAIL_ADDRESS = 'newqronusapi@qronuspythonapi.iam.gserviceaccount.com'
 ISSUER_ID = '3293346916822849083'
-SERVICE_ACCOUNT_PRIVATE_KEY = 'QronusPythonAPI-7a13db263138.json'
+SERVICE_ACCOUNT_PRIVATE_KEY = 'QronusPythonAPI-b13154f1ecc3.json'
 APPLICATION_NAME = 'ApplicationQronus'
 LOYALTY_CLASS_ID = 'LoyaltyClass'
 LOYALTY_OBJECT_ID = 'LoyaltyObject'

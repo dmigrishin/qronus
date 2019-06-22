@@ -1,5 +1,3 @@
-application: wobs-quickstart-python
-version: 4 
 runtime: python27
 api_version: 1
 threadsafe: true
@@ -17,9 +15,16 @@ handlers:
   static_dir: img
   secure: always
 
-- url: /js
-  static_dir: js
-  secure: always
+- url: /(.*\.js)
+  mime_type: text/javascript
+  static_files: static/\1
+  upload: static/(.*\.js)
+
+- url: /assets
+  static_dir: assets
+  expiration: "1h"
+  http_headers:
+    Vary: Accept-Encoding
 
 - url: /.*
   script: main.application
