@@ -23,7 +23,7 @@ def getLoyaltyClassList():
 
     # Define get() REST call of target vertical
     uri = 'https://www.googleapis.com/walletobjects/v1'
-    path = '/loyaltyClass?issuerId=3293346916822849083'# % ("offer", classId) # Resource representation is for an Offer, so endpoint for offerClass
+    path = '/loyaltyClass?issuerId=3293346916822849083'# Resource representation is for an loyalty, so endpoint for loyaltyClass
 
     authed_session = AuthorizedSession(credentials)
     
@@ -45,7 +45,7 @@ def insertLoyaltyClass(payload):
 
     # Define insert() REST call of target vertical
     uri = 'https://www.googleapis.com/walletobjects/v1'
-    path = '/loyaltyClass' # Resource representation is for an Offer, so endpoint for offerClass
+    path = '/loyaltyClass' # Resource representation is for an loyalty, so endpoint for loyaltyClass
 
   # There is no Google API for Passes Client Library for Python.
   # Authorize a http client with credential generated from Google API client library.
@@ -65,12 +65,13 @@ def insertLoyaltyClass(payload):
     print(response.text)
     return response
 
-classUid = "class_id_003"
-classId = '%s.%s' % (config.ISSUER_ID,classUid)
-issuerName = "Zaim Doverie"
-provider = "Qronus"
-programLogoUri = "https://farm66.staticflickr.com/65535/48486234062_d30e5b61f0.jpg"
-programName = "Our Loyalty Program"
-rgbcolor = "#ff01ff"
-classResourcePayload = makeLoyaltyClassResource(classId, issuerName, provider, programLogoUri,programName, rgbcolor)
-insertLoyaltyClass(classResourcePayload)
+if name == '__main__':
+    classUid = "class_id_003"
+    classId = '%s.%s' % (config.ISSUER_ID,classUid)
+    issuerName = "Zaim Doverie"
+    provider = "Qronus"
+    programLogoUri = "https://farm66.staticflickr.com/65535/48486234062_d30e5b61f0.jpg"
+    programName = "Our Loyalty Program"
+    rgbcolor = "#ff01ff"
+    classResourcePayload = makeLoyaltyClassResource(classId, issuerName, provider, programLogoUri,programName, rgbcolor)
+    insertLoyaltyClass(classResourcePayload)
