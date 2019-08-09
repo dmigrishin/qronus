@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Qronus Google Pay for Passes API</h1>
+        {% if loyaltyClassList %}
+
+        {{loyaltyClassList}}
+
+        <h2>Перечень классов лояльности:</h2>
+            {% for template in loyaltyClassList %}
+                <h4>Template Id : {{template.id}}</h4>
+                <h4>Color : {{template.hexBackgroundColor}}</h4>
+                <h4>Merchant Name : {{template.merchantName}}</h4>
+            {% endfor %}
+          
+        {% else %}
+            Сервис временно недоступен
+        {% endif %}
+
+                    
+</body>
+</html>
