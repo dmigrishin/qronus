@@ -65,7 +65,7 @@ def insertLoyaltyClass(payload):
     print(response.text)
     return response
 
-if name == '__main__':
+if __name__ == '__main__':
     classUid = "class_id_003"
     classId = '%s.%s' % (config.ISSUER_ID,classUid)
     issuerName = "Zaim Doverie"
