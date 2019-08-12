@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 def makeLoyaltyClassResource(classId, issuerName, provider, programLogoUri, programName, rgbcolor):
   # Define the resource representation of the Class
   # values should be from your DB/services; here we hardcode information
@@ -27,4 +30,36 @@ def makeLoyaltyClassResource(classId, issuerName, provider, programLogoUri, prog
     , "hexBackgroundColor" : rgbcolor
     }
     
+    return payload
+
+def makeLoyaltyObjectResource(classId, objectId):
+  # Define the resource representation of the Object
+  # values should be from your DB/services; here we hardcode information
+
+    payload = {}
+
+    # below defines an offer object. For more properties, check:
+    # https://developers.google.com/pay/passes/reference/v1/offerobject/insert
+    # https://developers.google.com/pay/passes/guides/pass-verticals/offers/design
+
+    payload = {
+        # required fields
+        "id" : objectId
+        ,"classId" : classId
+        ,"state" : "active"
+        # optional.  Check design and reference api to decide what's desirable
+        ,"barcode": {
+            "type": "qrCode"  #check reference API for types of barcode
+            ,"value": "1234abc"
+            ,"alternateText": "Ну Привет"
+        }
+        ,"loyaltyPoints": {
+            "label": "Points Balance",
+            "balance": {
+                "string": "500",
+                
+            }
+        }
+    }
+
     return payload

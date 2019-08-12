@@ -23,6 +23,20 @@
             Сервис временно недоступен
         {% endif %}
 
+        {% if loyaltyObjectList %}
+
+        {{loyaltyObjectList}}
+
+        <h2>Перечень карт в шаблоне:</h2>
+            {% for object in loyaltyObjectList %}
+                <h4>Template Id : {{object.id}}</h4>
+                
+            {% endfor %}
+          
+        {% else %}
+            Сервис временно недоступен
+        {% endif %}
+
                     
 </body>
 </html>
