@@ -1,0 +1,6 @@
+venv/
+env/
+qronus-0da95da0f40e.*
+*.pyc
+config.py
+*.log
