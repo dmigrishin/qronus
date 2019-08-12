@@ -1,5 +1,9 @@
+
+
 passes-rest-samples/python
 ==========================
+docker build -t qrn:latest .
+then docker run qrn
 
 This sample demonstrates integration of the basic components of the Google Pay API for Passes.  Review the [quickstart guide](https://developers.google.com/pay/save/samples/quickstart-python) to run the sample.
 
