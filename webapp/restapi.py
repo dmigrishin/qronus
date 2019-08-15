@@ -1,11 +1,15 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from google.oauth2 import service_account
 
 from google.auth.transport.requests import AuthorizedSession
-
+# from google.auth import crypt
+# from google.auth import jwt
 import config
-import jwt
-import json
-from webapp.resourceDefinition import makeLoyaltyClassResource, makeLoyaltyObjectResource
+import time
+import webapp.jwt
+from webapp.resourceDefinition import makeLoyaltyClassResource, makeLoyaltyObjectResource, updateLoyaltyObjectResource
 
 def makeOauthCredential():
     # the variables are in config file
@@ -89,7 +93,7 @@ def insertLoyaltyClass(payload):
     print(response.text)
     return response
 
-def insertOfferObject(payload):
+def insertLoyaltyObject(payload):
 
     headers = {
         'Accept': 'application/json',
@@ -120,6 +124,44 @@ def insertOfferObject(payload):
     print(response.text)
     return response
 
+def updateLoyaltyObject():
+    classUid = "class_id_003"
+    classId = '%s.%s' % (config.ISSUER_ID,classUid)
+    objectUid = "my_loyalty_object_Id_01" # CHANGEME
+    # check Reference API for format of "id" (https://developers.google.com/pay/passes/reference/v1/offerobject/insert).
+    # Must be alphanumeric characters, '.', '_', or '-'.
+    objectId = '%s.%s' % (config.ISSUER_ID,objectUid)
+    payload = updateLoyaltyObjectResource(classId, objectId)
+
+    headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json; charset=UTF-8'
+    }
+    credentials = makeOauthCredential()
+    response = None
+
+    # Define insert() REST call of target vertical
+    uri = 'https://www.googleapis.com/walletobjects/v1'
+    path = '/loyaltyObject/3293346916822849083.my_loyalty_object_Id_01' # Resource representation is for an Loyalty, so endpoint for loyaltyClass
+
+    # There is no Google API for Passes Client Library for Python.
+    # Authorize a http client with credential generated from Google API client library.
+    ## see https://google-auth.readthedocs.io/en/latest/user-guide.html#making-authenticated-requests
+    authed_session = AuthorizedSession(credentials)
+
+    # make the POST request to make an insert(); this returns a response object
+    # other methods require different http methods; for example, get() requires authed_Session.get(...)
+    # check the reference API to make the right REST call
+    ## https://developers.google.com/pay/passes/reference/v1/offerobject/insert
+    ## https://google-auth.readthedocs.io/en/latest/user-guide.html#making-authenticated-requests
+    response = authed_session.put(
+        uri+path          # REST API endpoint
+        ,headers=headers  # Header; optional
+        ,json=payload    # non-form-encoded Payload for POST. Check rest API for format based on method.
+    )
+    print(response.text)
+    return response
+
 def insertNewLoyaltyObject():
     classUid = "class_id_003"
     classId = '%s.%s' % (config.ISSUER_ID,classUid)
@@ -128,7 +170,9 @@ def insertNewLoyaltyObject():
     # Must be alphanumeric characters, '.', '_', or '-'.
     objectId = '%s.%s' % (config.ISSUER_ID,objectUid)
     objectResourcePayload = makeLoyaltyObjectResource(classId, objectId)
-    insertOfferObject(objectResourcePayload)
+    insertLoyaltyObject(objectResourcePayload)
+    
+    return
 
 def insertNewLoyaltyClass():
     classUid = "class_id_003"
@@ -141,28 +185,58 @@ def insertNewLoyaltyClass():
     classResourcePayload = makeLoyaltyClassResource(classId, issuerName, provider, programLogoUri,programName, rgbcolor)
     insertLoyaltyClass(classResourcePayload)
 
+    return
+
+# def makeJwt(objectId):
+
+#     encodedJwt = None
+    
+#     payload = {'loyaltyObjects': [{'id': '3293346916822849083.my_loyalty_object_Id_01'}]}
+#     signer = crypt.RSASigner.from_service_account_file(config.SERVICE_ACCOUNT_FILE)
+
+#     unsignedJwt = {}
+
+#     unsignedJwt['iss'] = config.SERVICE_ACCOUNT_EMAIL_ADDRESS
+#     unsignedJwt['aud'] = config.AUDIENCE
+#     unsignedJwt['typ'] = config.JWT_TYPE
+#     unsignedJwt['iat'] = int(time.time())
+#     unsignedJwt['payload'] = payload
+#     unsignedJwt['origins'] = config.ORIGINS
+      
+    
+#     try:
+#         # put into JSON Web Token (JWT) format for Google Pay API for Passes
+#         encodedJwt = jwt.encode(signer, unsignedJwt).decode('UTF-8')
+#         print(encodedJwt)
+#     except ValueError as err:
+#         print(err.args)
+
+#     # return "skinny" JWT. Try putting it into save link.
+#     # See https://developers.google.com/pay/passes/guides/get-started/implementing-the-api/save-to-google-pay#add-link-to-email
+#     return encodedJwt
+
+#insertNewLoyaltyObject()
+
 def makeJwt(objectId):
 
     signedJwt = None
 
     try:
-        # put into JSON Web Token (JWT) format for Google Pay API for Passes
-        googlePassJwt = jwt.googlePassJwt()
+
+    # put into JSON Web Token (JWT) format for Google Pay API for Passes
+        googlePassJwt = webapp.jwt.googlePassJwt()
+
         googlePassJwt.addLoyaltyObject({"id": objectId})
 
         # sign JSON to make signed JWT
         signedJwt = googlePassJwt.generateSignedJwt()
-        print(googlePassJwt.__dict__)
-        print(googlePassJwt.signer.__dict__)
-        print(signedJwt)
+
     except ValueError as err:
         print(err.args)
 
     # return "skinny" JWT. Try putting it into save link.
     # See https://developers.google.com/pay/passes/guides/get-started/implementing-the-api/save-to-google-pay#add-link-to-email
     return signedJwt
-
-#insertNewLoyaltyObject()
 
 def createLink():
     classUid = 'class_id_003' # CHANGEME
@@ -186,6 +260,7 @@ def createLink():
     return
 
 createLink()
+#updateLoyaltyObject()
 
 if __name__ == '__main__':
     #Note - Is necessary to provide error handling

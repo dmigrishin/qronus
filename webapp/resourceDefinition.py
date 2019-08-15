@@ -32,11 +32,30 @@ def makeLoyaltyClassResource(classId, issuerName, provider, programLogoUri, prog
     
     return payload
 
+def updateLoyaltyObjectResource(classId, objectId):
+    payload = {}
+    payload = {
+        # required fields
+        "id" : objectId
+        ,"classId" : classId
+        ,"state" : "active"
+        # optional.  Check design and reference api to decide what's desirable
+        ,"loyaltyPoints": {
+            "balance": {
+                "string": "900",
+                
+            }
+        }
+        ,"version":"2"
+    }
+    return payload
+
 def makeLoyaltyObjectResource(classId, objectId):
   # Define the resource representation of the Object
   # values should be from your DB/services; here we hardcode information
 
     payload = {}
+    
 
     # below defines an offer object. For more properties, check:
     # https://developers.google.com/pay/passes/reference/v1/offerobject/insert

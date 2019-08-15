@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from flask import Flask, render_template
 from webapp.restapi import getLoyaltyClassList, getLoyaltyObjectList
 
